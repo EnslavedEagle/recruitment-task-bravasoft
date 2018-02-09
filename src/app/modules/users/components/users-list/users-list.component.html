@@ -1,77 +1,67 @@
-<div>
-  <div class="loader" *ngIf="isLoadingResults">
-    <mat-spinner></mat-spinner>
-  </div>
+<mat-paginator [length]="resultsLength" [pageSize]="15"></mat-paginator>
 
-  <mat-paginator [length]="resultsLength" [pageSize]="15"></mat-paginator>
-  <div *ngIf="!isLoadingResults">
-
-    <mat-table #table [dataSource]="dataSource" class="table">
-
-      <ng-container matColumnDef="FirstName">
-        <mat-header-cell *matHeaderCellDef class="table__column">
-          First Name
-        </mat-header-cell>
-        <mat-cell *matCellDef="let user" class="table__cell">
-          {{user.FirstName}}
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="LastName">
-        <mat-header-cell *matHeaderCellDef class="table__column">
-          Last Name
-        </mat-header-cell>
-        <mat-cell *matCellDef="let user" class="table__cell">
-          {{user.LastName}}
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="Username">
-        <mat-header-cell *matHeaderCellDef class="table__column">
-          Username
-        </mat-header-cell>
-        <mat-cell *matCellDef="let user" class="table__cell">
-          {{user.Username}}
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="Email">
-        <mat-header-cell *matHeaderCellDef class="table__column">
-          Email
-        </mat-header-cell>
-        <mat-cell *matCellDef="let user" class="table__cell">
-          {{user.Email}}
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="Birthday">
-        <mat-header-cell *matHeaderCellDef class="table__column">
-          Birthday
-        </mat-header-cell>
-        <mat-cell *matCellDef="let user" class="table__cell">
-          {{user.Birthday}}
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="Options">
-        <mat-header-cell *matHeaderCellDef class="table__column">
-          Options
-        </mat-header-cell>
-        <mat-cell *matCellDef="let user" class="table__cell table__cell--options">
-          <ul>
-            <li>
-              <a [routerLink]="['/user/' + user.Id]">
-                <mat-icon>edit</mat-icon>
-              </a>
-            </li>
-          </ul>
-        </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-    </mat-table>
-
-  </div>
-  <mat-paginator [length]="resultsLength" [pageSize]="15"></mat-paginator>
+<div class="loader" *ngIf="isLoadingResults">
+  <mat-spinner></mat-spinner>
 </div>
+
+<mat-table #table [dataSource]="dataSource" *ngIf="!isLoadingResults">
+
+  <ng-container matColumnDef="FirstName">
+    <mat-header-cell *matHeaderCellDef>
+      First Name
+    </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      {{user.FirstName}}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="LastName">
+    <mat-header-cell *matHeaderCellDef>
+      Last Name
+    </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      {{user.LastName}}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Username">
+    <mat-header-cell *matHeaderCellDef>
+      Username
+    </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      {{user.Username}}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Email">
+    <mat-header-cell *matHeaderCellDef>
+      Email
+    </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      {{user.Email}}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Birthday">
+    <mat-header-cell *matHeaderCellDef>
+      Birthday
+    </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      {{user.Birthday}}
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Options">
+    <mat-header-cell *matHeaderCellDef>
+      Options
+    </mat-header-cell>
+    <mat-cell *matCellDef="let user">
+      <button mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

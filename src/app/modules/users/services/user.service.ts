@@ -17,19 +17,12 @@ export class UserService {
 
   constructor(private _http: HttpClient) {}
 
-  // public watchUserPages() {
-  //   return this._userListSubject.asObservable();
-  // }
-
   public fetchUserPage(page: number): Observable<any> {
     const params = new HttpParams()
       .set('_page', (page + 1).toString())
       .set('_limit', this._limit.toString());
     const url = `${environment.apiUrl}/users`;
-    console.log('Trying to fetch User page from: ' + url);
     return this._http
-      .get(url, { params })
-      .debounceTime(500)
-      .distinctUntilChanged();
+      .get(url, { params });
   }
 }
