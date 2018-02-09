@@ -1,26 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SharedModule } from '@modules/shared';
 import { UserService } from './services/user.service';
 import { UsersRoutingModule } from './users-routing.module';
-import { MatIconModule, MatButtonModule, MatProgressSpinnerModule, MatTableModule, MatPaginatorModule } from '@angular/material';
+import { MatIconModule, MatButtonModule, MatProgressSpinnerModule, MatTableModule, MatPaginatorModule, MatCardModule } from '@angular/material';
 const MATERIAL_MODULES = [
   MatIconModule,
   MatButtonModule,
   MatProgressSpinnerModule,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatCardModule
 ];
 
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { UserViewComponent } from './components/user-view/user-view.component';
 
 @NgModule({
   imports: [
     CommonModule,
     UsersRoutingModule,
+    SharedModule,
     ...MATERIAL_MODULES
   ],
   declarations: [
-    UsersListComponent
+    UsersListComponent,
+    UserViewComponent
   ],
   providers: [UserService]
 })

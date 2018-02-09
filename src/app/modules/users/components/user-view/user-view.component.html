@@ -1,0 +1,36 @@
+<div class="loader" *ngIf="userLoading">
+  <mat-loa
+</div>
+<div *ngIf="userData">
+  <div class="row">
+    <div class="col-xs-12 col-sm text-center text-sm-left">
+      <h2>Username</h2>
+    </div>
+    <div class="col-xs-12 col-sm text-center text-sm-right">
+      <button type="button" mat-raised-button color="primary" [routerLink]="['../../list']">Back</button>
+    </div>
+  </div>
+  <div class="row">
+    <mat-card class="user">
+      <mat-card-header>
+        <mat-card-title>
+          <h3 class="user__name">FirstName LastName</h3>
+        </mat-card-title>
+        <mat-card-subtitle class="user__nick">Username</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://picsum.photos/400/250/?random" alt="FirstName LastName" class="user__image">
+      <mat-card-content>
+        <div class="container">
+          <div class="row">
+            <p class="col-sm-6">
+              Birthday: <strong>{{ '1997-12-30' | date }}</strong>
+            </p>
+            <p class="col-sm-6">
+              Contact: <strong><a href="mailto:example@example.com">{{ 'example@example.com' }}</a></strong>
+            </p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

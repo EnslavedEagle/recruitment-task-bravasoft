@@ -25,4 +25,9 @@ export class UserService {
     return this._http
       .get(url, { params });
   }
+
+  public fetchUserDetails(userId: string): Observable<User> {
+    const url = `${environment.apiUrl}/users/${userId}`;
+    return <Observable<User>>this._http.get(url);
+  }
 }

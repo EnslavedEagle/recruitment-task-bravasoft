@@ -17,22 +17,23 @@ import { UserService } from '../../services/user.service';
 })
 export class UsersListComponent implements OnInit, OnDestroy {
   public dataSource: MatTableDataSource<User> = new MatTableDataSource<User>();
-  public displayedColumns = ['FirstName', 'LastName', 'Username', 'Email', 'Birthday', 'Options'];
+  public displayedColumns = ['FirstName', 'LastName', 'Options'];
 
   public resultsLength = 0;
   public isLoadingResults = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  private _paginatiorSub: Subscription;
+  @ViewChild(MatPaginator) private _paginator: MatPaginator;
 
   constructor(private _userService: UserService) {}
 
   ngOnInit() {
-    this.paginator.page
+    this._paginatiorSub = this._paginator.page
       .pipe(
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this._userService.fetchUserPage(this.paginator.pageIndex)
+          return this._userService.fetchUserPage(this._paginator.pageIndex)
         }),
         map((result) => {
           this.isLoadingResults = false;
@@ -47,6 +48,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this._paginatiorSub.unsubscribe();
   }
 
 }
