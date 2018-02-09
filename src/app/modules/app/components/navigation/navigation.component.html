@@ -1,3 +1,9 @@
-<p>
-  navigation works!
-</p>
+<mat-toolbar color="primary" class="navbar">
+  <nav class="container">
+    <span class="col-xs-12 col-sm text-sm-left text-center">Recruitment Task</span>
+    <div class="col-xs-12 col-sm text-sm-right text-center">
+      <button mat-raised-button color="accent" [routerLink]="['/users']">Users</button>
+      <button mat-raised-button color="accent" [routerLink]="['/movies']">Movies</button>
+    </div>
+  </nav>
+</mat-toolbar>
