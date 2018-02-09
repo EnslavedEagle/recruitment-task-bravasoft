@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class UserViewComponent implements OnInit {
   public userData: User;
+  public randomNumber = Math.floor(Math.random() * 10000); // random number to refresh placeholders
   private _userId;
   private _paramSub: Subscription;
   private _userSub: Subscription;
