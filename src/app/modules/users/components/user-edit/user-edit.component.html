@@ -1,0 +1,62 @@
+<div>
+  <div class="row">
+    <div class="col-xs-12 col-sm text-center text-sm-left">
+      <h2 *ngIf="userData">Editing: {{userData.Username}}</h2>
+    </div>
+    <div class="col-xs-12 col-sm text-center text-sm-right">
+      <button mat-raised-button *ngIf="userData"
+        type="button"
+        color="accent"
+        [disabled]="!userForm.dirty"
+        (click)="saveUser()">Save</button>
+      <button mat-raised-button *ngIf="userData"
+        type="button"
+        color="primary"
+        [routerLink]="['../../view', userData.Id]">Cancel</button>
+    </div>
+  </div>
+  <bv-loader *ngIf="!userData"></bv-loader>
+  <form class="userForm" *ngIf="userData" [formGroup]="userForm">
+    
+    <div class="row mt-2">
+      <div class="col-xs-12 col-sm-6 offset-sm-3 my-2">
+        <mat-form-field class="userForm__field">
+          <input type="text" matInput formControlName="FirstName" placeholder="First name" class="userForm__input">
+          <mat-error *ngIf="userForm.controls.FirstName.errors && userForm.controls.FirstName.touched">Please add a valid first name.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 offset-sm-3 my-2">
+        <mat-form-field class="userForm__field">
+          <input type="text" matInput formControlName="LastName" placeholder="Last name" class="userForm__input">
+          <mat-error *ngIf="userForm.controls.LastName.errors && userForm.controls.LastName.touched" class="userForm__input">Please add a valid last name.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 offset-sm-3 my-2">
+        <mat-form-field class="userForm__field">
+          <input type="text" matInput formControlName="Username" placeholder="Username" class="userForm__input">
+          <mat-hint>At least 3 letters or digits, no special characters.</mat-hint>
+          <mat-error *ngIf="userForm.controls.Username.errors && userForm.controls.Username.touched">Please add a valid username.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 offset-sm-3 my-2">
+        <mat-form-field class="userForm__field">
+          <input type="text" matInput formControlName="Email" placeholder="E-mail address" class="userForm__input">
+          <mat-error *ngIf="userForm.controls.Username.errors && userForm.controls.Username.touched">Please add a valid e-mail address.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 offset-sm-3 my-2">
+        <mat-form-field class="userForm__field">
+          <input matInput [matDatepicker]="birthdayPicker" formControlName="Birthday" placeholder="Birthday" class="userForm__input">
+          <mat-datepicker-toggle matSuffix [for]="birthdayPicker"></mat-datepicker-toggle>
+          <mat-datepicker #birthdayPicker></mat-datepicker>
+          <mat-error *ngIf="userForm.controls.Birthday.errors && userForm.controls.Birthday.touched">Please add a valid birth date.</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+  </form>
+</div>

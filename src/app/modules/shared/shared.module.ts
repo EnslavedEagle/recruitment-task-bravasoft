@@ -1,9 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatProgressSpinnerModule } from '@angular/material';
+import { MatInputModule, MatDatepickerModule, MatProgressSpinnerModule, MatNativeDateModule, MatSnackBarModule } from '@angular/material';
 const MODULES = [
-  MatProgressSpinnerModule
+  MatInputModule,
+  MatDatepickerModule,
+  MatProgressSpinnerModule,
+  MatNativeDateModule,
+  MatSnackBarModule
 ]
 
 import { LoaderComponent } from './components';
@@ -17,7 +21,10 @@ const EXPORTS = [
     CommonModule,
     ...MODULES
   ],
-  exports: EXPORTS,
+  exports: [
+    ...MODULES,
+    ...EXPORTS
+  ],
   declarations: [
     ...EXPORTS
   ]

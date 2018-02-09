@@ -30,4 +30,10 @@ export class UserService {
     const url = `${environment.apiUrl}/users/${userId}`;
     return <Observable<User>>this._http.get(url);
   }
+
+  public updateUserDetails(userId: string, data: object) {
+    const payload = <User>{ Id: userId, ...data };
+    const url = `${environment.apiUrl}/users/${userId}`;
+    return this._http.put(url, payload);
+  }
 }

@@ -1,14 +1,15 @@
-<bv-loader *ngIf="!userData"></bv-loader>
-<div *ngIf="userData">
+<div>
   <div class="row">
     <div class="col-xs-12 col-sm text-center text-sm-left">
-      <h2>{{userData.Username}}</h2>
+      <h2 *ngIf="userData">{{userData.Username}}</h2>
     </div>
     <div class="col-xs-12 col-sm text-center text-sm-right">
+      <button type="button" *ngIf="userData" mat-raised-button color="accent" [routerLink]="['../../edit/', userData.Id]">Edit</button>
       <button type="button" mat-raised-button color="primary" [routerLink]="['../../list']">Back</button>
     </div>
   </div>
-  <div class="row">
+  <bv-loader *ngIf="!userData"></bv-loader>
+  <div class="row" *ngIf="userData">
     <mat-card class="user">
       <mat-card-header>
         <mat-card-title>
