@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { MatButtonModule, MatCheckboxModule, MatInputModule, MatIconModule, MatMenuModule, MatToolbarModule } from '@angular/material';
@@ -33,7 +33,7 @@ import { MainComponent, NavigationComponent } from './components';
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     ...MATERIAL_MODULES,
     ...BOOTSTRAP_MODULES

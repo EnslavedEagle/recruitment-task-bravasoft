@@ -9,6 +9,8 @@ import { UsersListComponent } from './components/users-list/users-list.component
     CommonModule,
     UsersRoutingModule
   ],
-  declarations: [UsersListComponent]
+  declarations: [
+    UsersListComponent
+  ]
 })
 export class UsersModule { }
