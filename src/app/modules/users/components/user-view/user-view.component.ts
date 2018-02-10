@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { User } from '@app/interfaces';
 import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs/Subscription';
-import { DeleteDialogComponent } from '../delete-dialog';
+import { DeleteDialogComponent } from '@modules/shared/components/delete-dialog';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
@@ -44,8 +44,13 @@ export class UserViewComponent implements OnInit, OnDestroy {
 
   delete(): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      width: '320px',
-      data: { userId: this.userData.Id, username: this.userData.Username }
+      width: '380px',
+      data: {
+        confirmationHeading: 'Are you sure?',
+        confirmationText: `Do you really want to delete User ${this.userData.Username}?`,
+        userId: this.userData.Id,
+        username: this.userData.Username
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
 import { of as observableOf } from 'rxjs/observable/of';
 import { UserService } from '../../services/user.service';
-import { DeleteDialogComponent } from '../delete-dialog';
+import { DeleteDialogComponent } from '@modules/shared/components/delete-dialog';
 
 @Component({
   selector: 'bv-users-list',
@@ -62,8 +62,12 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
   delete(userId: string, username: string): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      width: '320px',
-      data: { userId: userId, username: username }
+      width: '380px',
+      data: {
+        confirmationHeading: 'Are you sure?',
+        confirmationText: `Do you really want to delete user <strong>${username}</strong>?`,
+        userId, username
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
