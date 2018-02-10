@@ -1,4 +1,33 @@
-<p>
-  Home works! And this is my loader:
-</p>
-<bv-loader></bv-loader>
+<div class="home">
+  <h1 class="home__heading">Zadanie rekrutacyjne - Bravasoft</h1>
+
+  <div class="home__content">
+    <p>
+      Witaj w moim rozwiązaniu zadania rekrutacyjnego! W tym miejscu opowiem nieco o procesie, jaki miał miejsce podczas powstawania tej wspaniałej aplikacji.
+    </p>
+
+    <ul>
+      <li>Do stworzenia podstaw aplikacji użyłem <strong>Angular CLI</strong>.</li>
+      <li>
+        Aplikacja jest podzielona na moduły i obsługuje <em>lazy loading</em> - zatem pobierają się z serwera dopiero wtedy, kiedy są potrzebne.<br>
+        Utworzone moduły to:
+        <ul>
+          <li><strong>App</strong>, zarządzający całą resztą,</li>
+          <li><strong>Home</strong>, który teraz widzisz,</li>
+          <li><strong>Users</strong>, pozwalający zarządzać kolekcją użytkowników,</li>
+          <li><strong>Movies</strong>, pozwalający zarządzać kolekcją filmów.</li>
+        </ul>
+      </li>
+      <li>Pracę zacząłem od dodania dodatkowych ścieżek do pliku <strong>tsconfig.json</strong> co pozwoliło łatwo odwyływać się do części elementów, np. <code>import {{'{'}} Costam } from '@interfaces/costam'</code> zamiast <code>import {{'{'}} Costam } from '../../../../../interfaces/costam'</code>.</li>
+      <li>Boostrap 4 dodany został przez dodanie <code>&lt;link ...&gt;</code> do pliku <code>index.html</code>. Aby uzyskać dostęp do mixinów Bootstrapa, dodatkowo dorzuciłem pliki <em>.scss</em> z paczki <a href="https://github.com/m-spyratos/bootstrap-4-grid" target="_blank"><code>boostrap-4-grid</code></a></li>
+      <li>Lista użytkowników stworzona została przy użyciu tabeli z zestawu <code>@angular/material</code>, która automatycznie wykonała paginację na podstawie przesłanego zestawu danych.</li>
+      <li>Tabele z kolekcji <code>@angular/material</code> niespecjalnie radzą sobie z responsywnością, ale dzięki temu, że ograniczyłem dane w niej wyświetlane - jakoś to wygląda. W przyszłości zapewne użyję raczej Bootstrapowych. :)</li>
+      <li>Widoki edycji korzystają z materialowych inputów (<code>&lt;input matInput&gt;</code> itd.)</li>
+      <li>Przy usuwaniu userów/filmów oczom użytkownika ukazuje się materialowy modal (<a href="https://material.angular.io/components/dialog/overview" target="_blank"><code>MatDialog</code></a>).</li>
+      <li>Do wykonywania żądań HTTP z użyciem klucza API w module Movies, skorzystałem z <strong>HTTPInterceptor</strong>, który pozwolił rozszerzyć obiekt <code>request</code> (w tym przypadku o Header <code>Authorization: Bearer example-token</code>).</li>
+      <li>Niniejsza aplikacja hostowana jest na <strong>Heroku</strong> z użyciem prostego serwera Express.js. Jeśli ładowała się długo, to przepraszam, Heroku usypia niepłatne instancje po 30 minutach nieaktywności. :)</li>
+    </ul>
+
+    <p>Pozdrawiam i gorąco oczekuję na feedback!<br>Patryk Bernasiewicz</p>
+  </div>
+</div>
