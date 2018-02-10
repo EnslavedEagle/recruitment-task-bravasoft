@@ -94,13 +94,13 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   public redirect(): void {
-    if (/^\/users\/list$/.test(this._previousRoute)) {
-      this._router.navigate(['../../list'], { relativeTo: this._route });
+    if (!this._userId) {
+      this._router.navigate(['../list'], { relativeTo: this._route });
     } else {
-      if (this._userId) {
-        this._router.navigate(['../../view/', this._userId], { relativeTo: this._route });
-      } else {
+      if (/^\/users\/list$/.test(this._previousRoute)) {
         this._router.navigate(['../../list'], { relativeTo: this._route });
+      } else {
+        this._router.navigate(['../../view/', this._userId], { relativeTo: this._route });
       }
     }
   }

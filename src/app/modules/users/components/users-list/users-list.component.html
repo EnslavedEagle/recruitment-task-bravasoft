@@ -1,4 +1,9 @@
 <bv-loader *ngIf="isLoadingResults"></bv-loader>
+<div class="col text-right">
+  <button mat-fab type="button" aria-label="Create new user" [routerLink]="['../create']">
+    <mat-icon aria-hidden="true">person_add</mat-icon>
+  </button>
+</div>
 <mat-table #table [dataSource]="dataSource" *ngIf="!isLoadingResults">
   <ng-container matColumnDef="FirstName">
     <mat-header-cell *matHeaderCellDef>
