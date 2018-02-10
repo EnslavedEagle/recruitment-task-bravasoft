@@ -17,7 +17,7 @@ const MATERIAL_MODULES = [
 ];
 
 import { MoviesRoutingModule } from './movies-routing.module';
-import { MoviesListComponent, StarRatingComponent, MovieDetailsComponent } from './components';
+import { MoviesListComponent, StarRatingComponent, MovieDetailsComponent, MovieEditComponent } from './components';
 import { MoviesService } from './services';
 
 @NgModule({
@@ -32,7 +32,8 @@ import { MoviesService } from './services';
   declarations: [
     MoviesListComponent,
     StarRatingComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    MovieEditComponent
   ],
   providers: [
     MoviesService

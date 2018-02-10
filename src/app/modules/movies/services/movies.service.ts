@@ -15,4 +15,16 @@ export class MoviesService {
   fetchMovieDetails(movieId: string): Observable<Movie> {
     return <Observable<Movie>>this._http.get(`${environment.apiUrl}/movies/${movieId}`);
   }
+
+  updateMovie(movieId: string, payload: Movie): Observable<any> {
+    return this._http.put(`${environment.apiUrl}/movies/${movieId}`, payload);
+  }
+
+  createMovie(payload: Movie): Observable<any> {
+    return this._http.post(`${environment.apiUrl}/movies`, payload);
+  }
+
+  deleteMovie(movieId: string) {
+    return this._http.delete(`${environment.apiKey}/movies/${movieId}`);
+  }
 }

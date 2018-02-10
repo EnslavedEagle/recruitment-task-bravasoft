@@ -1,0 +1,70 @@
+<p>
+  movie-edit works!
+</p>
+<div>
+  <div class="row">
+    <div class="col-xs-12 col-sm text-center text-sm-left">
+      <h2 *ngIf="movieForm">
+        {{ movie ? 'Editing: ' + movie.Title : 'Add new Movie' }}
+      </h2>
+    </div>
+    <div class="col-xs-12 col-sm text-center text-sm-right">
+      <button mat-raised-button *ngIf="movieForm"
+        type="button"
+        color="accent"
+        [disabled]="!movieForm.dirty || movieForm.invalid || formSent"
+        (click)="saveMovie()">Save</button>
+      <button mat-raised-button *ngIf="movieForm"
+        type="button"
+        color="primary"
+        (click)="redirect()"
+      >Cancel</button>
+    </div>
+  </div>
+  <bv-loader *ngIf="!movieForm"></bv-loader>
+  <form class="movieForm" *ngIf="movieForm" [formGroup]="movieForm">
+
+    <div class="row mt-2">
+      <div class="col-xs-12 col-sm-6 offset-sm-3 my-2">
+        <mat-form-field class="movieForm__field">
+          <input type="text" matInput formControlName="Title" placeholder="Title" class="movieForm__input">
+          <mat-error *ngIf="movieForm.controls.Title.errors && movieForm.controls.Title.touched">Please add a valid title.</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-xs-12 col-sm-6 offset-sm-3 my-2">
+        <mat-form-field class="movieForm__field">
+          <input type="text" matInput formControlName="Year" placeholder="Year" class="movieForm__input">
+          <mat-error *ngIf="movieForm.controls.Year.errors && movieForm.controls.Year.touched">Please add a valid year.</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-xs-12 col-sm-6 offset-sm-3 my-2">
+        <mat-form-field class="movieForm__field">
+          <input type="text" matInput formControlName="Director" placeholder="Director" class="movieForm__input">
+          <mat-error *ngIf="movieForm.controls.Director.errors && movieForm.controls.Director.touched">Please add a valid director's name.</mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-xs-12 col-sm-6 offset-sm-3 my-2">
+        <label class="text-muted"><small>Rating:</small></label>
+        <mat-radio-group formControlName="Rating" class="movieForm__rating">
+          <ng-container *ngFor="let option of ratingOptions; let i = index">
+            <mat-radio-button [value]="i+1" class="d-none"></mat-radio-button>
+            <mat-icon (click)="setRating(i+1)" class="movieForm__star">
+              {{ movieForm.controls.Rating.value >= i+1 ? 'star' : 'star_border' }}
+            </mat-icon>
+          </ng-container>
+          <span class="movieForm__ratingValue">{{movieForm.controls.Rating.value}} / 10</span>
+        </mat-radio-group>
+      </div>
+    </div>
+
+  </form>
+</div>
