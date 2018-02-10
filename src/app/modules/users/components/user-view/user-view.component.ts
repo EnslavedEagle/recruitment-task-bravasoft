@@ -5,8 +5,7 @@ import { UserService } from '../../services/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { DeleteDialogComponent } from '@modules/shared/components/delete-dialog';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
+import { RoutingStateService } from '@modules/shared/services';
 
 @Component({
   selector: 'bv-user-view',
@@ -26,8 +25,11 @@ export class UserViewComponent implements OnInit, OnDestroy {
     private _userService: UserService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _snackBar: MatSnackBar
-  ) {}
+    private _snackBar: MatSnackBar,
+    private _routingState: RoutingStateService
+  ) {
+    _routingState.loadRouting();
+  }
 
   ngOnInit() {
     this._paramSub = this._route.params.subscribe((params) => {
@@ -65,8 +67,6 @@ export class UserViewComponent implements OnInit, OnDestroy {
   }
 
   back(): void {
-    // TODO: Implement this: https://blog.hackages.io/our-solution-to-get-a-previous-route-with-angular-5-601c16621cf0
-    // and make the back() redirect to proper thing in the past
   }
 
 }

@@ -19,6 +19,7 @@ const MODULES = [
 ];
 
 import { LoaderComponent } from './components';
+import { RoutingStateService } from './services';
 
 const EXPORTS = [
   LoaderComponent
@@ -35,6 +36,9 @@ const EXPORTS = [
   ],
   declarations: [
     ...EXPORTS
+  ],
+  providers: [
+    RoutingStateService
   ]
 })
 export class SharedModule { }

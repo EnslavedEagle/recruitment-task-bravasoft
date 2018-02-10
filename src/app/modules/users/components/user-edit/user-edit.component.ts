@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { User } from '@app/interfaces';
 import { Subscription } from 'rxjs/Subscription';
 import { UserService } from '../../services/user.service';
+import { RoutingStateService } from '@modules/shared/services';
 
 @Component({
   selector: 'bv-user-edit',
@@ -19,14 +20,19 @@ export class UserEditComponent implements OnInit, OnDestroy {
   private _paramSub: Subscription = new Subscription();
   private _userSub: Subscription = new Subscription();
   private _submitSub: Subscription = new Subscription();
+  private _previousRoute: string;
 
   constructor(
     private _fb: FormBuilder,
     private _userService: UserService,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _snackBar: MatSnackBar
-  ) { }
+    private _snackBar: MatSnackBar,
+    private _routingState: RoutingStateService
+  ) {
+    this._routingState.loadRouting();
+    this._previousRoute = this._routingState.getPreviousUrl();
+  }
 
   ngOnInit() {
     this._paramSub = this._route.params.subscribe((params) => {
@@ -88,10 +94,14 @@ export class UserEditComponent implements OnInit, OnDestroy {
   }
 
   public redirect(): void {
-    if (this._userId) {
-      this._router.navigate(['../../view/', this._userId], { relativeTo: this._route });
+    if (/^\/users\/list$/.test(this._previousRoute)) {
+      this._router.navigate(['../../list'], { relativeTo: this._route });
     } else {
-      this._router.navigate(['../list'], { relativeTo: this._route });
+      if (this._userId) {
+        this._router.navigate(['../../view/', this._userId], { relativeTo: this._route });
+      } else {
+        this._router.navigate(['../../list'], { relativeTo: this._route });
+      }
     }
   }
 }
