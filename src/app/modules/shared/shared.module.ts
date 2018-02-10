@@ -8,7 +8,8 @@ import {
   MatProgressSpinnerModule,
   MatNativeDateModule,
   MatSnackBarModule,
-  MatDialogModule
+  MatDialogModule,
+  MatButtonModule
 } from '@angular/material';
 const MODULES = [
   MatIconModule,
@@ -17,7 +18,8 @@ const MODULES = [
   MatProgressSpinnerModule,
   MatNativeDateModule,
   MatSnackBarModule,
-  MatDialogModule
+  MatDialogModule,
+  MatButtonModule
 ];
 
 import { LoaderComponent, DeleteDialogComponent } from './components';
