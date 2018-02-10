@@ -37,8 +37,7 @@ import { DeleteDialogComponent } from '@modules/shared/components';
   declarations: [
     UsersListComponent,
     UserViewComponent,
-    UserEditComponent,
-    DeleteDialogComponent
+    UserEditComponent
   ],
   entryComponents: [
     DeleteDialogComponent

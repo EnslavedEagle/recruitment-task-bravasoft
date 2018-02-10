@@ -20,11 +20,12 @@ const MODULES = [
   MatDialogModule
 ];
 
-import { LoaderComponent } from './components';
+import { LoaderComponent, DeleteDialogComponent } from './components';
 import { RoutingStateService, AppHttpInterceptor } from './services';
 
 const EXPORTS = [
-  LoaderComponent
+  LoaderComponent,
+  DeleteDialogComponent
 ];
 
 @NgModule({

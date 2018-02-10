@@ -34,8 +34,7 @@ import { DeleteDialogComponent } from '@modules/shared/components';
     MoviesListComponent,
     StarRatingComponent,
     MovieDetailsComponent,
-    MovieEditComponent,
-    DeleteDialogComponent
+    MovieEditComponent
   ],
   providers: [
     MoviesService
