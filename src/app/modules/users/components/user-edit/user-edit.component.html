@@ -1,22 +1,24 @@
 <div>
   <div class="row">
     <div class="col-xs-12 col-sm text-center text-sm-left">
-      <h2 *ngIf="userData">Editing: {{userData.Username}}</h2>
+      <h2 *ngIf="userForm">
+        {{ userData ? 'Editing: ' + userData.Username : 'Create new User' }}
+      </h2>
     </div>
     <div class="col-xs-12 col-sm text-center text-sm-right">
-      <button mat-raised-button *ngIf="userData"
+      <button mat-raised-button *ngIf="userForm"
         type="button"
         color="accent"
-        [disabled]="!userForm.dirty"
+        [disabled]="!userForm.dirty || userForm.invalid || formSent"
         (click)="saveUser()">Save</button>
-      <button mat-raised-button *ngIf="userData"
+      <button mat-raised-button *ngIf="userForm"
         type="button"
         color="primary"
-        [routerLink]="['../../view', userData.Id]">Cancel</button>
+        (click)="redirect()">Cancel</button>
     </div>
   </div>
-  <bv-loader *ngIf="!userData"></bv-loader>
-  <form class="userForm" *ngIf="userData" [formGroup]="userForm">
+  <bv-loader *ngIf="!userForm"></bv-loader>
+  <form class="userForm" *ngIf="userForm" [formGroup]="userForm">
     
     <div class="row mt-2">
       <div class="col-xs-12 col-sm-6 offset-sm-3 my-2">

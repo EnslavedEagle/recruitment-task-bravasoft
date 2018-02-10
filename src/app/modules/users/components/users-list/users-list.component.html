@@ -1,9 +1,5 @@
-<mat-paginator [length]="resultsLength" [pageSize]="15"></mat-paginator>
-
 <bv-loader *ngIf="isLoadingResults"></bv-loader>
-
 <mat-table #table [dataSource]="dataSource" *ngIf="!isLoadingResults">
-
   <ng-container matColumnDef="FirstName">
     <mat-header-cell *matHeaderCellDef>
       First Name
@@ -38,3 +34,4 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
+<mat-paginator [length]="resultsLength" [pageSize]="15"></mat-paginator>
