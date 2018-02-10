@@ -16,7 +16,7 @@ const MODULES = [
   MatNativeDateModule,
   MatSnackBarModule,
   MatDialogModule
-]
+];
 
 import { LoaderComponent } from './components';
 

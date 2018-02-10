@@ -4,7 +4,14 @@ import { SharedModule } from '@modules/shared';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from './services/user.service';
 import { UsersRoutingModule } from './users-routing.module';
-import { MatIconModule, MatButtonModule, MatProgressSpinnerModule, MatTableModule, MatPaginatorModule, MatCardModule } from '@angular/material';
+import {
+  MatIconModule,
+  MatButtonModule,
+  MatProgressSpinnerModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatCardModule
+} from '@angular/material';
 const MATERIAL_MODULES = [
   MatIconModule,
   MatButtonModule,

@@ -5,9 +5,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   selector: 'bv-delete-dialog',
   templateUrl: './delete-dialog.html'
 })
-export class DeleteDialog {
+export class DeleteDialogComponent {
   constructor(
-    public dialogRef: MatDialogRef<DeleteDialog>,
+    public dialogRef: MatDialogRef<DeleteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -11,7 +11,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.sass']
 })
-export class UserEditComponent implements OnInit {
+export class UserEditComponent implements OnInit, OnDestroy {
   public userForm: FormGroup;
   public userData: User;
   public formSent = false;

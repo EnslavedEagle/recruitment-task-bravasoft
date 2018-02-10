@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
 import { of as observableOf } from 'rxjs/observable/of';
 import { UserService } from '../../services/user.service';
-import { DeleteDialog } from '../delete-dialog';
+import { DeleteDialogComponent } from '../delete-dialog';
 
 @Component({
   selector: 'bv-users-list',
@@ -46,7 +46,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this._userService.fetchUserPage(this._paginator.pageIndex)
+          return this._userService.fetchUserPage(this._paginator.pageIndex);
         }),
         map((result) => {
           this.isLoadingResults = false;
@@ -61,7 +61,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   delete(userId: string, username: string): void {
-    let dialogRef = this.dialog.open(DeleteDialog, {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '320px',
       data: { userId: userId, username: username }
     });
