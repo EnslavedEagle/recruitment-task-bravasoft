@@ -5,7 +5,7 @@
         <h2>Movies list</h2>
       </div>
       <div class="col-xs-12 col-sm-6 text-center text-sm-right">
-        <button mat-mini-fab color="accent">
+        <button mat-mini-fab color="accent" [routerLink]="['../create']">
           <mat-icon>add</mat-icon>
         </button>
       </div>
@@ -16,7 +16,7 @@
         <mat-card class="movie__card">
           <mat-card-title>
             <h3 class="movie__title">
-              <a href="" [routerLink]="['../details', movie.Id]">{{movie.Title}}</a>
+              <a [routerLink]="['../details', movie.Id]">{{movie.Title}}</a>
             </h3>
           </mat-card-title>
           <mat-card-subtitle>
@@ -27,7 +27,7 @@
               <bv-star-rating [rating]="movie.Rating"></bv-star-rating>
             </div>
             <div class="movie__actions">
-              <button mat-icon-button type="button" color="primary">
+              <button mat-icon-button type="button" color="primary" [routerLink]="['../edit/', movie.Id]">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button type="button" color="warn">
