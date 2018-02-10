@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { User } from '@app/interfaces';
-import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog, MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { startWith } from 'rxjs/operators/startWith';
@@ -28,7 +28,8 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialog: MatDialog,
-    private _userService: UserService
+    private _userService: UserService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -60,7 +61,6 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   delete(userId: string, username: string): void {
-    console.log(userId, username);
     let dialogRef = this.dialog.open(DeleteDialog, {
       width: '320px',
       data: { userId: userId, username: username }
@@ -69,7 +69,10 @@ export class UsersListComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
         this._userService.deleteUser(userId)
-          .subscribe(() => this.fetch());
+          .subscribe(() => {
+            this._snackBar.open('User deleted!', null, { duration: 3000 });
+            this.fetch();
+          });
       }
     });
   }
