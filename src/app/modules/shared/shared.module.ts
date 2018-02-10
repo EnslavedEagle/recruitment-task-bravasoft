@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {
   MatInputModule,
   MatDatepickerModule,
@@ -19,7 +19,7 @@ const MODULES = [
 ];
 
 import { LoaderComponent } from './components';
-import { RoutingStateService } from './services';
+import { RoutingStateService, AppHttpInterceptor } from './services';
 
 const EXPORTS = [
   LoaderComponent
@@ -28,6 +28,7 @@ const EXPORTS = [
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     ...MODULES
   ],
   exports: [
@@ -38,7 +39,12 @@ const EXPORTS = [
     ...EXPORTS
   ],
   providers: [
-    RoutingStateService
+    RoutingStateService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppHttpInterceptor,
+      multi: true
+    }
   ]
 })
 export class SharedModule { }
