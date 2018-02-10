@@ -65,7 +65,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
       width: '380px',
       data: {
         confirmationHeading: 'Are you sure?',
-        confirmationText: `Do you really want to delete user <strong>${username}</strong>?`,
+        confirmationText: `Do you really want to delete user ${username}?`,
         userId, username
       }
     });
