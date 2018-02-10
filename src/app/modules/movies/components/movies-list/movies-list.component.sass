@@ -1,0 +1,34 @@
+@import 'src/sass/mixins/bem'
+@import 'src/sass/third-party/bootstrap-4-grid/grid'
+
+\:host
+  .movie
+    margin: 1.2em 0
+
+    +e('card')
+      background: #fdfdfd
+      height: 100%
+      
+      +media-breakpoint-down('xs')
+        padding-bottom: 120px
+
+      +media-breakpoint-up('sm')
+        padding-bottom: 90px
+
+    +e('title')
+      font-size: 1.2rem
+
+    +e('extra')
+      position: absolute
+      bottom: 10px
+      left: 12px
+      right: 12px
+
+    +e('rating')
+      margin: .5em auto
+      text-align: center
+
+    +e('actions')
+      text-align: center
+      font-size: 1.3em
+      overflow-x: hidden

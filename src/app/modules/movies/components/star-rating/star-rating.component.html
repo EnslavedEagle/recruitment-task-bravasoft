@@ -1,0 +1,9 @@
+<div class="star-rating">
+  <div class="star-rating__stars" aria-hidden="true">
+    <mat-icon *ngFor="let star of stars">
+      <ng-container *ngIf="star">star</ng-container>
+      <ng-container *ngIf="!star">star_border</ng-container>
+    </mat-icon>
+  </div>
+  <span class="star-rating__text">{{rating}}/10</span>
+</div>

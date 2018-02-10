@@ -9,10 +9,6 @@ export class AppHttpInterceptor implements HttpInterceptor {
     const authReq = req.clone({
       headers: req.headers.set('Authorization', `Bearer ${environment.apiKey}`)
     });
-    return next.handle(authReq)
-      .catch((error, caught) => {
-        console.error('Auth Request Error: ', error);
-        return Observable.throw(error);
-      }) as any;
+    return next.handle(authReq);
   }
 }

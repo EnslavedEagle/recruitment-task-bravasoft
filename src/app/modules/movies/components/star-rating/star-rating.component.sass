@@ -1,0 +1,16 @@
+@import 'src/sass/third-party/bootstrap-4-grid/grid'
+
+\:host
+  .star-rating
+    display: flex
+    align-items: flex-start
+    justify-content: center
+
+    &__stars
+      margin-top: -.1em
+      margin-righ: .25em
+
+    &__text
+      font-weight: bold
+      +media-breakpoint-down('xs')
+        display: none
