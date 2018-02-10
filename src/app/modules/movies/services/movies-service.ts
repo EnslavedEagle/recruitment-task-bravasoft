@@ -11,4 +11,8 @@ export class MoviesService {
   fetchMovies(): Observable<Movie[]> {
     return <Observable<Movie[]>>this._http.get(`${environment.apiUrl}/movies`);
   }
+
+  fetchMovieDetails(movieId: string): Observable<Movie> {
+    return <Observable<Movie>>this._http.get(`${environment.apiUrl}/movies/${movieId}`);
+  }
 }

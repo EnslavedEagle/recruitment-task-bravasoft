@@ -1,0 +1,30 @@
+<div>
+  <div class="row">
+    <div *ngIf="movie" class="col-xs-12 col-sm-5 text-center text-sm-left">
+      <h2>{{movie.Title}}</h2>
+    </div>
+    <div class="col-xs-12 col-sm text-center text-sm-right">
+      <button *ngIf="movie" type="button" mat-raised-button color="warn" (click)="delete(movie.Id)">Delete</button>
+      <button *ngIf="movie" type="button" mat-raised-button color="accent" [routerLink]="['../../edit', movie.Id]">Edit</button>
+      <button type="button" mat-raised-button color="primary" [routerLink]="['../../list']">Back to list</button>
+    </div>
+  </div>
+  <bv-loader *ngIf="!movie"></bv-loader>
+  <div class="row" *ngIf="movie">
+    <div class="movie mt-5 mb-4 mx-auto d-flex flex-column-reverse flex-md-row">
+      <img [src]="'https://picsum.photos/300/400/?random&time=' + randomNumber" [alt]="movie.Title" class="movie__image">
+      <div class="movie__details">
+        <h3 class="movie__title">{{movie.Title}}</h3>
+        <p class="movie__produced text-secondary">
+          {{movie.Year}}, {{movie.Director}}
+        </p>
+        <div class="trailer mt-4">
+          <p>See the trailer of <em>not</em> the <strong>{{movie.Title}}</strong>:</p>
+          <div class="trailer__wrapper">
+            <iframe src="https://www.youtube.com/embed/JNwNXF9Y6kY" frameborder="0" class="trailer__frame"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

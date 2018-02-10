@@ -10,6 +10,7 @@
         </button>
       </div>
     </header>
+    <bv-loader *ngIf="!moviesList"></bv-loader>
     <div class="row">
       <div class="movie col-xs-12 col-md-6 col-lg-4" *ngFor="let movie of moviesList; let i = index">
         <mat-card class="movie__card">
