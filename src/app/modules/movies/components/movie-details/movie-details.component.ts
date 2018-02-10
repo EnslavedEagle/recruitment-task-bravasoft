@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Movie } from '@app/interfaces';
 import { MoviesService } from '../../services';
 import { Subscription } from 'rxjs/Subscription';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { DeleteDialogComponent } from '@modules/shared/components';
 
 @Component({
   selector: 'bv-movie-details',
@@ -15,9 +17,11 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   private _moviesSub: Subscription = new Subscription();
 
   constructor(
+    public dialog: MatDialog,
     private _router: Router,
     private _route: ActivatedRoute,
-    private _moviesService: MoviesService
+    private _moviesService: MoviesService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -32,8 +36,27 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
     this._moviesSub.unsubscribe();
   }
 
+
   delete(): void {
-    console.log('Not implemented yet');
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '380px',
+      data: {
+        confirmationHeading: 'Are you sure?',
+        confirmationText: `Do you really want to delete movie ${this.movie.Title}?`,
+        movieId: this.movie.Id,
+        title: this.movie.Title
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this._moviesService.deleteMovie(this.movie.Id)
+          .subscribe(() => {
+            this._snackBar.open('Movie deleted!', null, { duration: 3000 });
+            this._router.navigate(['../../list'], { relativeTo: this._route });
+          });
+      }
+    });
   }
 
 }

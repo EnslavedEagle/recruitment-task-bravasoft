@@ -24,7 +24,7 @@ const MATERIAL_MODULES = [
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { UserViewComponent } from './components/user-view/user-view.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
-import { DeleteDialogComponent } from '@modules/shared/components/delete-dialog/delete-dialog';
+import { DeleteDialogComponent } from '@modules/shared/components';
 
 @NgModule({
   imports: [

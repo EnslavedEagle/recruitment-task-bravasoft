@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'create',
     component: MovieEditComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'list'
   }
 ];
 

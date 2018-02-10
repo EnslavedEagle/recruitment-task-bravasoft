@@ -19,6 +19,7 @@ const MATERIAL_MODULES = [
 import { MoviesRoutingModule } from './movies-routing.module';
 import { MoviesListComponent, StarRatingComponent, MovieDetailsComponent, MovieEditComponent } from './components';
 import { MoviesService } from './services';
+import { DeleteDialogComponent } from '@modules/shared/components';
 
 @NgModule({
   imports: [
@@ -33,10 +34,14 @@ import { MoviesService } from './services';
     MoviesListComponent,
     StarRatingComponent,
     MovieDetailsComponent,
-    MovieEditComponent
+    MovieEditComponent,
+    DeleteDialogComponent
   ],
   providers: [
     MoviesService
+  ],
+  entryComponents: [
+    DeleteDialogComponent
   ]
 })
 export class MoviesModule { }

@@ -25,6 +25,6 @@ export class MoviesService {
   }
 
   deleteMovie(movieId: string) {
-    return this._http.delete(`${environment.apiKey}/movies/${movieId}`);
+    return this._http.delete(`${environment.apiUrl}/movies/${movieId}`);
   }
 }

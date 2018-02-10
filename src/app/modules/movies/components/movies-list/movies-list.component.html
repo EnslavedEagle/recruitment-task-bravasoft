@@ -10,8 +10,8 @@
         </button>
       </div>
     </header>
-    <bv-loader *ngIf="!moviesList"></bv-loader>
-    <div class="row">
+    <bv-loader *ngIf="isLoading"></bv-loader>
+    <div class="row" *ngIf="!isLoading && moviesList">
       <div class="movie col-xs-12 col-md-6 col-lg-4" *ngFor="let movie of moviesList; let i = index">
         <mat-card class="movie__card">
           <mat-card-title>
@@ -30,7 +30,7 @@
               <button mat-icon-button type="button" color="primary" [routerLink]="['../edit/', movie.Id]">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button type="button" color="warn">
+              <button mat-icon-button type="button" color="warn" (click)="delete(movie.Id, movie.Title)">
                 <mat-icon>delete_forever</mat-icon>
               </button>
             </div>
