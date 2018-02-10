@@ -15,8 +15,10 @@ import { RoutingStateService } from '@modules/shared/services';
 export class UserViewComponent implements OnInit, OnDestroy {
   public userData: User;
   public randomNumber = Math.floor(Math.random() * 10000); // random number to refresh placeholders
-  private _paramSub: Subscription;
-  private _userSub: Subscription;
+  private _paramSub: Subscription = new Subscription();
+  private _userSub: Subscription = new Subscription();
+  private _dialogSub: Subscription = new Subscription();
+  private _deletionSub: Subscription = new Subscription();
   private _userId: string;
   private _back: any;
 
@@ -42,6 +44,8 @@ export class UserViewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this._paramSub.unsubscribe();
     this._userSub.unsubscribe();
+    this._dialogSub.unsubscribe();
+    this._deletionSub.unsubscribe();
   }
 
   delete(): void {
@@ -55,9 +59,9 @@ export class UserViewComponent implements OnInit, OnDestroy {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    this._dialogSub = dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this._userService.deleteUser(this._userId)
+        this._deletionSub = this._userService.deleteUser(this._userId)
           .subscribe(() => {
             this._snackBar.open('User deleted!', null, { duration: 3000 });
             this._router.navigate(['../../list'], { relativeTo: this._route });

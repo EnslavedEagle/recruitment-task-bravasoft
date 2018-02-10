@@ -23,8 +23,10 @@ export class UsersListComponent implements OnInit, OnDestroy {
   public resultsLength = 0;
   public isLoadingResults = true;
 
-  private _paginatiorSub: Subscription;
+  private _paginatiorSub: Subscription = new Subscription();
   @ViewChild(MatPaginator) private _paginator: MatPaginator;
+  private _dialogSub: Subscription = new Subscription();
+  private _deletionSub: Subscription = new Subscription();
 
   constructor(
     public dialog: MatDialog,
@@ -38,6 +40,8 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this._paginatiorSub.unsubscribe();
+    this._deletionSub.unsubscribe();
+    this._dialogSub.unsubscribe();
   }
 
   fetch() {
@@ -70,9 +74,9 @@ export class UsersListComponent implements OnInit, OnDestroy {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    this._dialogSub = dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this._userService.deleteUser(userId)
+        this._deletionSub = this._userService.deleteUser(userId)
           .subscribe(() => {
             this._snackBar.open('User deleted!', null, { duration: 3000 });
             this.fetch();

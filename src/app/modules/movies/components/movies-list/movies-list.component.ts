@@ -1,17 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Movie } from '@app/interfaces';
 import { MoviesService } from '../../services';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { DeleteDialogComponent } from '@modules/shared/components';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'bv-movies-list',
   templateUrl: './movies-list.component.html',
   styleUrls: ['./movies-list.component.sass']
 })
-export class MoviesListComponent implements OnInit {
+export class MoviesListComponent implements OnInit, OnDestroy {
   public moviesList: Movie[];
   public isLoading = true;
+
+  private _moviesSub: Subscription = new Subscription();
+  private _deletionSub: Subscription = new Subscription();
+  private _dialogSub: Subscription = new Subscription();
 
   constructor(
     public dialog: MatDialog,
@@ -22,10 +27,16 @@ export class MoviesListComponent implements OnInit {
   ngOnInit() {
     this.fetch();
   }
+  
+  ngOnDestroy() {
+    this._moviesSub.unsubscribe();
+    this._deletionSub.unsubscribe();
+    this._dialogSub.unsubscribe();
+  }
 
   fetch() {
     this.isLoading = true;
-    this._moviesService.fetchMovies()
+    this._moviesSub = this._moviesService.fetchMovies()
       .subscribe((movies) => {
         this.moviesList = movies;
         this.isLoading = false;
@@ -33,7 +44,6 @@ export class MoviesListComponent implements OnInit {
   }
 
   delete(movieId: string, title: string): void {
-    console.log(movieId, title);
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '380px',
       data: {
@@ -43,9 +53,9 @@ export class MoviesListComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    this._dialogSub = dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this._moviesService.deleteMovie(movieId)
+        this._deletionSub = this._moviesService.deleteMovie(movieId)
           .subscribe(() => {
             this._snackBar.open('Movie deleted!', null, { duration: 3000 });
             this.fetch();

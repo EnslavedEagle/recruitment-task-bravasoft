@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -12,7 +12,7 @@ import { RoutingStateService } from '@modules/shared/services';
   templateUrl: './movie-edit.component.html',
   styleUrls: ['./movie-edit.component.sass']
 })
-export class MovieEditComponent implements OnInit {
+export class MovieEditComponent implements OnInit, OnDestroy {
   public movieForm: FormGroup;
   public movie: Movie;
   public formSent = false;
@@ -51,6 +51,11 @@ export class MovieEditComponent implements OnInit {
         this._initForm();
       }
     });
+  }
+
+  ngOnDestroy() {
+    this._paramSub.unsubscribe();
+    this._movieSub.unsubscribe();
   }
 
   setRating(value) {

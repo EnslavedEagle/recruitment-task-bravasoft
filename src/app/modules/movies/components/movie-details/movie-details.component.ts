@@ -15,6 +15,8 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   public movie: Movie;
   private _paramSub: Subscription = new Subscription();
   private _moviesSub: Subscription = new Subscription();
+  private _deletionSub: Subscription = new Subscription();
+  private _dialogSub: Subscription = new Subscription();
 
   constructor(
     public dialog: MatDialog,
@@ -34,9 +36,10 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this._paramSub.unsubscribe();
     this._moviesSub.unsubscribe();
+    this._deletionSub.unsubscribe();
+    this._dialogSub.unsubscribe();
   }
-
-
+  
   delete(): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '380px',
@@ -48,9 +51,9 @@ export class MovieDetailsComponent implements OnInit, OnDestroy {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    this._dialogSub = dialogRef.afterClosed().subscribe(result => {
       if (result === true) {
-        this._moviesService.deleteMovie(this.movie.Id)
+        this._deletionSub = this._moviesService.deleteMovie(this.movie.Id)
           .subscribe(() => {
             this._snackBar.open('Movie deleted!', null, { duration: 3000 });
             this._router.navigate(['../../list'], { relativeTo: this._route });
