@@ -17,6 +17,7 @@ const MATERIAL_MODULES = [
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { UserViewComponent } from './components/user-view/user-view.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
+import { DeleteDialog } from './components/delete-dialog/delete-dialog';
 
 @NgModule({
   imports: [
@@ -29,7 +30,11 @@ import { UserEditComponent } from './components/user-edit/user-edit.component';
   declarations: [
     UsersListComponent,
     UserViewComponent,
-    UserEditComponent
+    UserEditComponent,
+    DeleteDialog
+  ],
+  entryComponents: [
+    DeleteDialog
   ],
   providers: [UserService]
 })

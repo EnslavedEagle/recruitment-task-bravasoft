@@ -13,7 +13,7 @@ import { User } from '@app/interfaces';
 @Injectable()
 export class UserService {
   private _limit = 15;
-  private _userListSubject: Subject<any> = new Subject<any>();
+  private _userList: Observable<any>;
 
   constructor(private _http: HttpClient) {}
 
@@ -22,8 +22,7 @@ export class UserService {
       .set('_page', (page + 1).toString())
       .set('_limit', this._limit.toString());
     const url = `${environment.apiUrl}/users`;
-    return this._http
-      .get(url, { params });
+    return this._http.get(url, { params });
   }
 
   public fetchUserDetails(userId: string): Observable<User> {
@@ -41,5 +40,10 @@ export class UserService {
     const payload = <User>data;
     const url = `${environment.apiUrl}/users`;
     return this._http.post(url, payload);
+  }
+
+  public deleteUser(userId: string): Observable<any> {
+    const url = `${environment.apiUrl}/users/${userId}`;
+    return this._http.delete(url);
   }
 }

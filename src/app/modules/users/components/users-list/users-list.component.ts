@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { User } from '@app/interfaces';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { startWith } from 'rxjs/operators/startWith';
@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators/map';
 import { catchError } from 'rxjs/operators/catchError';
 import { of as observableOf } from 'rxjs/observable/of';
 import { UserService } from '../../services/user.service';
+import { DeleteDialog } from '../delete-dialog';
 
 @Component({
   selector: 'bv-users-list',
@@ -25,9 +26,20 @@ export class UsersListComponent implements OnInit, OnDestroy {
   private _paginatiorSub: Subscription;
   @ViewChild(MatPaginator) private _paginator: MatPaginator;
 
-  constructor(private _userService: UserService) {}
+  constructor(
+    public dialog: MatDialog,
+    private _userService: UserService
+  ) {}
 
   ngOnInit() {
+    this.fetch();
+  }
+
+  ngOnDestroy() {
+    this._paginatiorSub.unsubscribe();
+  }
+
+  fetch() {
     this._paginatiorSub = this._paginator.page
       .pipe(
         startWith({}),
@@ -44,11 +56,22 @@ export class UsersListComponent implements OnInit, OnDestroy {
           this.isLoadingResults = false;
           return observableOf([]);
         })
-      ).subscribe(data => this.dataSource.data = data);
+      ).subscribe((data) => this.dataSource.data = data);
   }
 
-  ngOnDestroy() {
-    this._paginatiorSub.unsubscribe();
+  delete(userId: string, username: string): void {
+    console.log(userId, username);
+    let dialogRef = this.dialog.open(DeleteDialog, {
+      width: '320px',
+      data: { userId: userId, username: username }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        this._userService.deleteUser(userId)
+          .subscribe(() => this.fetch());
+      }
+    });
   }
 
 }

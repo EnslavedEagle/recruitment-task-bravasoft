@@ -25,8 +25,11 @@
       Options
     </mat-header-cell>
     <mat-cell *matCellDef="let user">
-      <button mat-icon-button color="primary">
+      <button mat-icon-button color="primary" [routerLink]="['../edit', user.Id]">
         <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" (click)="delete(user.Id, user.Username)">
+        <mat-icon>delete forever</mat-icon>
       </button>
     </mat-cell>
   </ng-container>

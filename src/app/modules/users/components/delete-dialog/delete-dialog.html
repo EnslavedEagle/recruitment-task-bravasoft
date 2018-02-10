@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Are you sure?</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want to delete User <strong>{{data.username}}</strong>?
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warning" (click)="onNoClick()">No</button>
+  <button mat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Yes</button> 
+</div>
