@@ -1,5 +1,7 @@
 # Recruitment task for Bravasoft
 
+![Screenshot](http://tth.patrykb.pl/_screenshots/screen-bravasoft.JPG)
+
 The task was to create an Angular app that provides CRUD functionalities for Users and Movies lists.
 
 The live version of the app is hosted on Heroku: click here to see it (warning! The first loading may even take around 2 minutes, due to the fact that Heroku puts unused apps to sleep after some time without any activity).
